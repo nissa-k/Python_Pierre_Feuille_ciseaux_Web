@@ -1,49 +1,45 @@
 from flask import Flask, render_template, request, redirect, url_for
 import src.info.info_bot, src.rules.rules_game
-from src.gaming.game import etat_jeu, jouer_manche, demarrer_partie # on import car sinon faut remettre le dictionnaire dans le serveur on importe comme ca il a acces a tout 
+from src.gaming.game import etat_jeu, jouer_manche, demarrer_partie
 import os
 
-# Spécifie manuellement où se trouve le dossier templates
-templates_dir = r"C:\Users\karab\OneDrive\Desktop\ynov\Python_Pierre_Feuille_ciseaux_Web\templates"
+# === Chemins absolus ===
+base_dir = r"C:/Users/safaa/Python_Pierre_Feuille_ciseaux_Web"
+templates_dir = os.path.join(base_dir, "templates")
+static_dir = os.path.join(base_dir, "static")  # 💡 dossier pour tes CSS, images, etc.
 
+# === Initialisation de Flask ===
+app = Flask(__name__, template_folder=templates_dir, static_folder=static_dir)
 
-app = Flask(__name__, template_folder=templates_dir) # Indique à Flask où se trouvent les templates HTML car le fichier n est pas dans back mais a la racine donc on mets le chemain plus haut 
 print("CHEMIN TEMPLATES UTILISÉ PAR FLASK :", templates_dir)
+print("CHEMIN STATIC UTILISÉ PAR FLASK :", static_dir)
+
 
 @app.route('/')
 def menu():
-    return render_template('menu.html') 
+    return render_template('menu.html')
 
-@app.route('/jouer', methods=['GET', 'POST']) #permet de dire que cette route accepte les methodes get et post par defaut c est get
+
+@app.route('/jouer', methods=['GET', 'POST'])
 def jouer():
-    resultat = None  # Au début, aucune manche jouée donc none dans l'html
+    resultat = None
 
-    if request.method == 'POST': #on verifie que la requet est un post si c est true on le fait sinon on l ignore 1er chargement ca ignore car get quand on appuie sur commencer la ca execute car post
-        action = request.form.get('action') #recupere la valeur du bouton appuyee name="action" dans le html jouer.html donc request.form = {'action': 'demarrer_partie'} contient ca et le .get('action') recupere demarrer_partie donc transforme en variable action
+    if request.method == 'POST':
+        action = request.form.get('action')
 
-        # Commencer une nouvelle partie
-        if action == 'demarrer_partie':   #request.form → contient toutes les données envoyées par le formulaire.
-            nom = request.form.get('nom_joueur', 'Annonyme') #get('nom_joueur', 'Annonyme') → récupère la valeur du champ nom_joueur :Si l’utilisateur a écrit “Alice”, nom = "Alice" Si l’utilisateur n’a rien écrit, nom = "Annonyme"
-            manches = int(request.form.get('total_manches', 3))  #get('total_manches', 3) → récupère la valeur du champ total_manches : Si l’utilisateur a choisi 5 manches, manches = "5" (string) Si l’utilisateur n’a rien choisi, manches = "3" (string)
-            demarrer_partie(nom, manches) # on demarre la partie avec les valeurs recuperees
+        # Démarrer une nouvelle partie
+        if action == 'demarrer_partie':
+            nom = request.form.get('nom_joueur', 'Anonyme')
+            manches = int(request.form.get('total_manches', 3))
+            demarrer_partie(nom, manches)
             return redirect(url_for('jouer'))
-        
 
-        #return redirect(url_for('jouer'))  # Redirige vers la même page pour éviter le re-post du formulaire
-        
         # Jouer une manche
-        elif action in ['pierre','feuille','ciseaux'] and etat_jeu['partie_en_cours']: #si action est bien pierre feuille ou ciseaux et qu une partie est en cours:  
-            action = request.form.get('action') #quand tu clique sur la manche et que quand tu clique choix joueur recupere la valeur du bouton name="choix_joueur" value="pierre" ou feuille ou ciseaux
-            
-            # Jouer une manche avec le choix du joueur
-            resultat = jouer_manche(action)      #l'ordi choisi leatoire compare met a jour les scores etc.. en gros execute le fichier game
-            resultat['nom_joueur'] = etat_jeu['nom_joueur'] #on ajoute le nom du joueur au resultat pour l afficher dans l html
-       
-    # Si une partie est en cours mais aucune manche jouée encore, on prépare un résultat par défaut pour l'affichage
+        elif action in ['pierre', 'feuille', 'ciseaux'] and etat_jeu['partie_en_cours']:
+            resultat = jouer_manche(action)
+            resultat['nom_joueur'] = etat_jeu['nom_joueur']
 
-    if etat_jeu['partie_en_cours'] and resultat is None: #resultat est None au debut car on a pas encore jouer de manche
-
-        #on cree un dico resultat avec les valeurs actuelles de etat_jeu pour l afficher dans l html
+    if etat_jeu['partie_en_cours'] and resultat is None:
         resultat = {
             'choix_joueur': None,
             'choix_ordi': None,
@@ -54,22 +50,22 @@ def jouer():
             'fini': False,
             'message_final': '',
             'nom_joueur': etat_jeu['nom_joueur']
-            }
-        
-    # Affichage GET ou POST
-    return render_template('jouer.html', resultat=resultat, etat_jeu=etat_jeu) #on passe resultat et etat_jeu a l html pour qu il puisse les utiliser
+        }
+
+    return render_template('jouer.html', resultat=resultat, etat_jeu=etat_jeu)
 
 
 @app.route('/regles')
 def regles():
-    print("CHEMIN TEMPLATES UTILISÉ PAR FLASK :", templates_dir)
-    regles=src.rules.rules_game.regles_jeu()
+    regles = src.rules.rules_game.regles_jeu()
     return render_template('rules.html', reglesJeux=regles)
+
 
 @app.route('/infos')
 def infos():
-    info=src.info.info_bot.info_bot()
+    info = src.info.info_bot.info_bot()
     return render_template('infoBot.html', infoRobot=info)
+
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
