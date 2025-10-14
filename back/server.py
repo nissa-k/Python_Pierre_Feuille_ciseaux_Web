@@ -3,10 +3,9 @@ import src.info.info_bot, src.rules.rules_game
 from src.gaming.game import etat_jeu, jouer_manche, demarrer_partie
 import os
 
-# === Chemins absolus ===
-base_dir = r"C:/Users/safaa/Python_Pierre_Feuille_ciseaux_Web"
+base_dir = r"C:/Users/karab/OneDrive/Desktop/ynov/Python_Pierre_Feuille_ciseaux_Web"
 templates_dir = os.path.join(base_dir, "templates")
-static_dir = os.path.join(base_dir, "static")  # 💡 dossier pour tes CSS, images, etc.
+static_dir = os.path.join(base_dir, "static")  # dossier pour tes CSS, images, etc.
 
 # === Initialisation de Flask ===
 app = Flask(__name__, template_folder=templates_dir, static_folder=static_dir)
