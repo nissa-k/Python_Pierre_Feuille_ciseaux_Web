@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="{{ url_for('static', filename='rules.css') }}">
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{{ reglesJeux.titre }}</title>
 </head>
 <body>
-    <h1>{{ reglesJeux.titre }}</h1> <!-- Affichage du titre des règles du jeu .titre car dico dans rules-->
+    <h1>{{ reglesJeux.titre }}</h1>
 
-    <pre>{{ reglesJeux.message }}</pre> <!-- Affichage des règles du jeu pre garde les \n -->
+    <div class="rules-card">
+        <div class="rules-content">
+            {{ reglesJeux.message }}
+        </div>
+    </div>
 
-    <a href="/"><button>Retour au menu</button></a> <!-- Bouton pour revenir au menu principal -->
+    <a href="/"><button>Retour au menu</button></a>
 </body>
 </html>

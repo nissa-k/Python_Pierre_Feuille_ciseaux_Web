@@ -1,46 +1,164 @@
-/* ===== PAGE INFO BOT / RÉSULTAT ===== */
+/* static/infoBot.css */
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: "Poppins", Arial, sans-serif;
-    background: linear-gradient(135deg, #55efc4, #81ecec);
-    color: #2d3436;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Conteneur principal */
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
     text-align: center;
 }
 
+/* Titre principal */
 h1 {
-    font-size: 2.5em;
-    color: #2d3436;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
+/* Paragraphe de message */
 p {
-    background-color: rgba(255,255,255,0.9);
-    padding: 20px 30px;
+    background: white;
+    padding: 2rem;
     border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     max-width: 600px;
-    line-height: 1.6em;
-    font-size: 1.2em;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    margin-bottom: 30px;
+    width: 90%;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Bouton de retour */
 button {
-    background-color: #00cec9;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
     color: white;
     border: none;
-    padding: 12px 25px;
-    font-size: 1em;
-    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 button:hover {
-    background-color: #009999;
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* Lien sans style par défaut */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    p {
+        padding: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.7rem;
+    }
+    
+    p {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation d'entrée */
+h1, p, a {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Effet de brillance sur le bouton */
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
+}
+
+button:hover::after {
+    transform: rotate(30deg) translate(10%, 10%);
 }

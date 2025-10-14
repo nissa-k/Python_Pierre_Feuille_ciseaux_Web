@@ -1,24 +1,19 @@
-/* Variables de couleurs Mario Party */
-:root {
-    --mario-red: #e52521;
-    --mario-blue: #049cd8;
-    --mario-yellow: #fbd000;
-    --mario-green: #43b047;
-    --mario-purple: #b043b0;
-    --mario-dark-blue: #0c64a0;
-    --mario-light-blue: #7ed4f7;
-    --mario-white: #ffffff;
-    --mario-black: #000000;
+/* static/jouer.css */
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Styles généraux */
 body {
-    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
-    background: linear-gradient(135deg, var(--mario-blue) 0%, var(--mario-light-blue) 100%);
-    color: var(--mario-white);
-    margin: 0;
-    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,246 +21,261 @@ body {
 }
 
 /* Conteneur principal */
-.game-container {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
+body > * {
+    max-width: 800px;
     width: 90%;
-    color: var(--mario-black);
     text-align: center;
-    border: 8px solid var(--mario-yellow);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Étoiles décoratives */
-.game-container::before, .game-container::after {
-    content: "★";
-    position: absolute;
-    color: var(--mario-yellow);
-    font-size: 40px;
-    opacity: 0.7;
-}
-
-.game-container::before {
-    top: 10px;
-    left: 10px;
-}
-
-.game-container::after {
-    bottom: 10px;
-    right: 10px;
 }
 
 /* Titre principal */
 h1 {
-    color: var(--mario-red);
-    font-size: 2.5rem;
-    text-shadow: 3px 3px 0 var(--mario-yellow);
-    margin-bottom: 20px;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 2rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+    }
+}
+
+/* Sous-titres */
+h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Paragraphes */
+p {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Formulaires */
+form {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 1.5rem 0;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+/* Champs de saisie */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    transform: scale(1.02);
+}
+
+/* Boutons principaux */
+button {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    margin: 0.5rem;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-h2 {
-    color: var(--mario-blue);
-    font-size: 1.8rem;
-    margin-top: 0;
-    text-shadow: 2px 2px 0 var(--mario-white);
+button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Informations du jeu */
-.game-info {
-    background-color: var(--mario-light-blue);
-    border-radius: 15px;
-    padding: 15px;
-    margin: 15px 0;
-    border: 4px solid var(--mario-dark-blue);
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+button:active {
+    transform: translateY(-1px);
 }
 
-.game-info p {
-    margin: 5px 10px;
-    font-weight: bold;
-    color: var(--mario-dark-blue);
-}
-
-/* Boutons de sélection */
-.selection-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
-.choice-btn {
-    background-color: var(--mario-red);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 0 var(--mario-dark-blue);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Boutons de choix (Pierre, Feuille, Ciseaux) */
+button[name="action"] {
+    min-width: 120px;
+    background: linear-gradient(45deg, #48dbfb, #0abde3);
     position: relative;
     overflow: hidden;
 }
 
-.choice-btn::before {
-    content: "";
+button[name="action"]:nth-child(2) {
+    background: linear-gradient(45deg, #feca57, #ff9ff3);
+}
+
+button[name="action"]:nth-child(3) {
+    background: linear-gradient(45deg, #54a0ff, #5f27cd);
+}
+
+/* Effet de brillance sur les boutons */
+button::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
-    border-radius: 50%;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
 }
 
-.choice-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 0 var(--mario-dark-blue);
+button:hover::after {
+    transform: rotate(30deg) translate(10%, 10%);
 }
 
-.choice-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 3px 0 var(--mario-dark-blue);
+/* Section de score */
+p strong {
+    color: #667eea;
 }
 
-.choice-btn:nth-child(2) {
-    background-color: var(--mario-green);
+/* Message final */
+form:last-of-type {
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95));
+    border: 3px solid #4CAF50;
 }
 
-.choice-btn:nth-child(3) {
-    background-color: var(--mario-blue);
+/* Animation d'entrée */
+form, h2, p {
+    animation: slideInUp 0.6s ease-out; /* applique l annimation  */
 }
 
-.choice-icon {
-    font-size: 2rem;
-    margin-bottom: 5px;
+@keyframes slideInUp { /* fait glisse les evenement fonction  */
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Formulaire de démarrage */
-.start-form {
-    background-color: var(--mario-yellow);
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px 0;
-    border: 4px solid var(--mario-red);
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.7rem;
+    }
+    
+    form {
+        padding: 1.5rem;
+    }
+    
+    button {
+        padding: 12px 25px;
+        font-size: 1rem;
+        margin: 0.3rem;
+    }
+    
+    button[name="action"] {
+        min-width: 100px;
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 0.5rem auto;
+    }
 }
 
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    form {
+        padding: 1rem;
+    }
+    
+    p {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    input[type="text"],
+    input[type="number"] {
+        max-width: 100%;
+    }
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--mario-dark-blue);
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 3px solid var(--mario-blue);
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-/* Boutons généraux */
-button {
-    background-color: var(--mario-red);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 0 var(--mario-dark-blue);
-    margin: 5px;
-}
-
-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 0 var(--mario-dark-blue);
-}
-
-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 3px 0 var(--mario-dark-blue);
-}
-
-button[type="submit"] {
-    background-color: var(--mario-green);
-}
-
-/* Résultats */
-.result-message {
-    background-color: var(--mario-purple);
-    color: white;
-    border-radius: 15px;
-    padding: 15px;
-    margin: 20px 0;
-    font-size: 1.3rem;
-    font-weight: bold;
-    border: 4px solid var(--mario-yellow);
-    animation: pulse 1.5s infinite;
+/* État de la partie */
+.partie-en-cours {
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.02); }
     100% { transform: scale(1); }
 }
 
-/* Animation pour les choix */
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.choice-selected {
-    animation: bounce 0.5s ease;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .game-container {
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    .choice-btn {
-        width: 80px;
-        height: 80px;
-        font-size: 1rem;
-    }
-    
-    .choice-icon {
-        font-size: 1.5rem;
-    }
-    
-    .selection-buttons {
-        gap: 10px;
-    }
+/* Score highlight */
+p:contains("Score") {
+    background: linear-gradient(45deg, #fff9c4, #fff);
+    border: 2px solid #feca57;
+    font-weight: bold;
 }
