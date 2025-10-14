@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu Pierre-Feuille-Ciseaux</title>
+</head>
+<body>
+    <h1>Jeu Pierre-Feuille-Ciseaux</h1>
+
+
+    {% if resultat and resultat.fini %}
+        <h2>Partie terminée !</h2>
+        <p>{{ resultat.message_final }}</p>
+        <form method="GET" action="/">
+            <button type="submit">Retour au Menu</button>
+        </form>
+
+    {% elif etat_jeu.partie_en_cours %}
+        <p><strong>Joueur :</strong> {{ resultat.nom_joueur }}</p>
+        <p><strong>Manche :</strong> {{ resultat.manche }} / {{ resultat.total_manches }}</p>
+        <p><strong>Score :</strong> {{ resultat.score_joueur }} | Ordi : {{ resultat.score_ordi }}</p>
+
+        <form method="POST" action="/jouer">
+            <p>Choisis ton élément :</p>
+            <button type="submit" name="action" value="pierre">Pierre</button>
+            <button type="submit" name="action" value="feuille">Feuille</button>
+            <button type="submit" name="action" value="ciseaux">Ciseaux</button>
+        </form>
+
+    {% else %}
+        <p>Bienvenue ! Commence une nouvelle partie.</p>
+        <form method="POST" action="/jouer">
+            <label for="nom_joueur">Nom du joueur :</label>
+            <input type="text" id="nom_joueur" name="nom_joueur" placeholder="Ton nom" required>
+            <br><br>
+            <label for="total_manches">Nombre de manches :</label>
+            <input type="number" id="total_manches" name="total_manches" min="1" max="10" value="3">
+            <br><br>
+            <button type="submit" name="action" value="demarrer_partie">Commencer la Partie</button>
+        </form>
+    {% endif %}
+</body>
+</html>
