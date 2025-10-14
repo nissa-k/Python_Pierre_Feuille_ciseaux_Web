@@ -126,13 +126,7 @@ python_pierre_feuille_ciseaux_web/
 ## 👥 Auteurs
 
 **Safaa Zemmar & Nissa Karadag**  
-*Développeurs Full-Stack*
 
-## 📄 Licence
-
-Ce projet est open-source et disponible sous licence MIT.
-
----
 
 **Prêt à défier l'ordinateur ? 🎯**  
 *Lancez le serveur et que le meilleur gagne !*
