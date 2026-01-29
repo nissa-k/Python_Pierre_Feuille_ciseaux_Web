@@ -51,7 +51,7 @@ Ouvrez votre navigateur et rendez-vous à l'adresse :
 http://127.0.0.1:8080 (deja indiqué dans la console)
 ```
 
-## 🎮 Comment Jouer ?
+##  Comment Jouer ?
 
 1. **Démarrage** : Cliquez sur "Jouer" depuis le menu principal
 2. **Configuration** : 
